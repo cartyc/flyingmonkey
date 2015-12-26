@@ -1,0 +1,27 @@
+web:
+ build: .
+ expose:
+  - "6379"
+ ports:
+  - "8000:8000"
+ links:
+  - db
+  - redis
+ volumes:
+  - .:/code
+ command: python propertydatabase/manage.py runserver 0.0.0.0:8000
+
+redis:
+ image: redis:latest
+ ports:
+  - "6379:6379"
+ command: redis-server
+
+rcli:
+ image: redis:latest
+ links:
+  - redis
+ command: redis-cli -h redis
+
+db:
+ image: postgres
