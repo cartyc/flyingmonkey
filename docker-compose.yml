@@ -24,4 +24,4 @@ rcli:
  command: redis-cli -h redis
 
 db:
- image: postgres
+ image: mdillon:postgis
